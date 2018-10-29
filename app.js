@@ -22,6 +22,7 @@ const zoos = {
     }
 }
 
+// shows all zoos
 app.get('/', function (req, res) {
     res.json(zoos);
 })
