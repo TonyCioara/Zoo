@@ -11,28 +11,48 @@
 const express = require('express');
 const app = express();
 
-const zoos = {
-    "San_Diego": {
-        "hippo": "type 1",
-        "lion": "type2"
+const zoos = [
+    {  
+        "name": "San_Diego",
+        "animals": [
+            {
+                "name": "hippo",
+                "type": 1
+            },
+            {
+                "name": "lion",
+                "type": 2
+            }
+        ]
     },
-    "DC": {
-        "zebra": "type 1",
-        "koala": "type 3"
+    {   
+        "name": "DC",
+        "animals": [
+            {
+                "name": "zebra",
+                "type": 1
+            },
+            {
+                "name": "koala",
+                "type": 3
+            }
+        ]
     }
-}
+]
 
 // shows all zoos
 app.get('/', function (req, res) {
     res.json(zoos);
 })
 
-app.get('/zoo/:zooId', function (req,res) {
+// Show one zoo
+app.get('/zoos/:zooId', function (req,res) {
     res.json(zoos[`${req.params.zooId}`]);
 })
 
-app.get('/zoo/:zooId/animals/:animalId', function (req, res) {
-    res.json(zoos[`${req.params.zooId}`][`${req.params.animalId}`])
+// Show one animal at a zoo
+app.get('/zoos/:zooId/animals/:animalId', function (req, res) {
+    res.json(zoos[`${req.params.zooId}`]['animals'][`${req.params.animalId}`]);
 })
 
 app.listen('3000', () => {
